@@ -204,3 +204,20 @@ def seed_database():
 
 if __name__ == "__main__":
     seed_database()
+
+def seed_if_empty():
+    from app.database import SessionLocal
+    db = SessionLocal()
+    try:
+        user_count = db.query(User).count()
+        if user_count > 0:
+            print("Database already contains data. Skipping auto-seed.")
+            return
+    except Exception as e:
+        print("Database query failed (tables may not exist). Proceeding to seed...")
+    finally:
+        db.close()
+        
+    print("Database is empty or missing tables. Seeding default data...")
+    seed_database()
+

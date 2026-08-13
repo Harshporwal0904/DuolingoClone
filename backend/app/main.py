@@ -9,6 +9,14 @@ from .routers import path, lessons, social
 async def lifespan(app: FastAPI):
     # Create all database tables on startup
     Base.metadata.create_all(bind=engine)
+    
+    # Auto-seed the database if it is empty
+    try:
+        from .seed import seed_if_empty
+        seed_if_empty()
+    except Exception as e:
+        print("Error during auto-seeding:", e)
+        
     yield
 
 app = FastAPI(title="Duolingo Clone API", lifespan=lifespan)
