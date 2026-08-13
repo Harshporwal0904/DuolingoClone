@@ -70,6 +70,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export const api = {
   getUserMe: () => request<UserMe>("/api/user/me", { cache: "no-store" }),
   getPath: () => request<PathUnit[]>("/api/path", { cache: "no-store" }),
+  getSkillProgress: (skillId: number) => request<{ lessons_completed: number; total_lessons: number; next_lesson_id: number }>(`/api/skills/${skillId}/progress`, { cache: "no-store" }),
   refillHearts: () => request<UserMe>("/api/user/refill-hearts", { method: "POST" }),
   getLessonExercises: (lessonId: number) => request<Exercise[]>(`/api/lessons/${lessonId}`),
   checkExerciseAnswer: (lessonId: number, exerciseId: number, answer: string) =>

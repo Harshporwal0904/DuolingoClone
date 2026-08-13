@@ -19,6 +19,41 @@ router = APIRouter()
 # Real authentication/user retrieval would plug in here.
 DEFAULT_USER_ID = 1
 
+@router.get("/skills/{skill_id}/progress")
+def get_skill_progress(skill_id: int, db: Session = Depends(get_db)):
+    """
+    Returns the user's progress for a skill, including lessons completed, total lessons,
+    and the next lesson ID (defaults to the first lesson if all completed).
+    """
+    user = db.query(User).filter(User.id == DEFAULT_USER_ID).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    progress = db.query(UserSkillProgress).filter_by(
+        user_id=user.id, 
+        skill_id=skill_id
+    ).first()
+    
+    lessons = db.query(Lesson).filter_by(skill_id=skill_id).order_by(Lesson.order_index.asc()).all()
+    total_lessons = len(lessons)
+    
+    if not lessons:
+        raise HTTPException(status_code=404, detail="No lessons found for this skill")
+        
+    lessons_completed = progress.lessons_completed if progress else 0
+    
+    # Determine next lesson index to play
+    if lessons_completed < total_lessons:
+        next_lesson = lessons[lessons_completed]
+    else:
+        next_lesson = lessons[0]  # Practice mode: play the first lesson
+        
+    return {
+        "lessons_completed": lessons_completed,
+        "total_lessons": total_lessons,
+        "next_lesson_id": next_lesson.id
+    }
+
 @router.get("/lessons/{lesson_id}", response_model=List[ExerciseOut])
 def get_lesson_exercises(lesson_id: int, db: Session = Depends(get_db)):
     """
