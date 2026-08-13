@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js production build / dev cache
+.next/
+out/
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env
+
+# Local env files
+.env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Databases
+*.db
+*.db-journal
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
