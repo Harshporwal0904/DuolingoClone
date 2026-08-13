@@ -92,3 +92,22 @@ class PathUnitOut(BaseSchema):
     order_index: int
     skills: List[PathSkillOut]
 
+class AnswerCheckIn(BaseModel):
+    answer: str
+
+class AnswerCheckOut(BaseModel):
+    correct: bool
+    correct_answer: str
+
+class LessonCompleteIn(BaseModel):
+    correct_count: int
+    total_count: int
+
+class LessonCompleteOut(BaseModel):
+    xp_earned: int
+    new_total_xp: int
+    streak_count: int
+    crowns: int
+    skill_status: SkillStatus
+
+
