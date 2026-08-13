@@ -67,6 +67,20 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   return response.json();
 }
 
+export interface LeaderboardUser {
+  username: string;
+  total_xp: number;
+  rank: number;
+}
+
+export interface UserProfile {
+  username: string;
+  total_xp: number;
+  streak_count: number;
+  created_at: string;
+  crowns_count: number;
+}
+
 export const api = {
   getUserMe: () => request<UserMe>("/api/user/me", { cache: "no-store" }),
   getPath: () => request<PathUnit[]>("/api/path", { cache: "no-store" }),
@@ -86,4 +100,6 @@ export const api = {
   advanceDay: () => request<{ message: string; last_active_date: string }>("/api/user/advance-day", {
     method: "POST",
   }),
+  getLeaderboard: () => request<LeaderboardUser[]>("/api/leaderboard", { cache: "no-store" }),
+  getUserProfile: () => request<UserProfile>("/api/user/profile", { cache: "no-store" }),
 };

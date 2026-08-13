@@ -110,4 +110,17 @@ class LessonCompleteOut(BaseModel):
     crowns: int
     skill_status: SkillStatus
 
+class LeaderboardUserOut(BaseModel):
+    username: str
+    total_xp: int
+    rank: int
+
+class UserProfileOut(BaseModel):
+    username: str
+    total_xp: int
+    streak_count: int
+    created_at: datetime
+    crowns_count: int
+
+
 

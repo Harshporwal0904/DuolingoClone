@@ -27,6 +27,7 @@ class User(Base):
     last_active_date = Column(Date, nullable=True)
     daily_xp_goal = Column(Integer, default=20, nullable=False)
     xp_today = Column(Integer, default=0, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     # Relationships
     skill_progresses = relationship("UserSkillProgress", back_populates="user", cascade="all, delete-orphan")
