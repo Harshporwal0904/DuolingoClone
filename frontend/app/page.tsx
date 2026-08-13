@@ -147,14 +147,13 @@ export default function HomePage() {
             <span className="text-2xl">🛡️</span>
             <span>PROFILE & LEADERBOARD</span>
           </Link>
-          <div className="flex items-center gap-4 px-4 py-3 text-gray-500 font-extrabold rounded-2xl hover:bg-gray-100 transition-all cursor-not-allowed">
-            <span className="text-2xl">🎯</span>
-            <span>QUESTS</span>
-          </div>
-          <div className="flex items-center gap-4 px-4 py-3 text-gray-500 font-extrabold rounded-2xl hover:bg-gray-100 transition-all cursor-not-allowed">
-            <span className="text-2xl">🏪</span>
-            <span>SHOP</span>
-          </div>
+          <Link
+            href="/settings"
+            className="flex items-center gap-4 px-4 py-3 text-gray-500 font-extrabold rounded-2xl hover:bg-gray-100 transition-all cursor-pointer"
+          >
+            <span className="text-2xl">⚙️</span>
+            <span>SETTINGS</span>
+          </Link>
         </nav>
       </aside>
 
@@ -235,9 +234,9 @@ export default function HomePage() {
                         {/* Node circle button */}
                         {isLocked ? (
                           <div
-                            className={`w-20 h-20 rounded-full flex items-center justify-center border-b-6 ${colors.bg} ${colors.border} ${colors.darkBorder} cursor-not-allowed`}
+                            className={`w-20 h-20 rounded-full flex items-center justify-center border-b-6 ${colors.bg} ${colors.border} ${colors.darkBorder} opacity-50 grayscale cursor-not-allowed select-none`}
                           >
-                            <span className="text-2xl opacity-50">🔒</span>
+                            <span className="text-2xl">🔒</span>
                           </div>
                         ) : (
                           <Link
@@ -340,10 +339,10 @@ export default function HomePage() {
           <span className="text-2xl">🛡️</span>
           <span>Profile</span>
         </Link>
-        <div className="flex flex-col items-center text-gray-400 font-extrabold text-xs gap-0.5 opacity-50 cursor-not-allowed">
-          <span className="text-2xl">🏪</span>
-          <span>Shop</span>
-        </div>
+        <Link href="/settings" className="flex flex-col items-center text-gray-400 font-extrabold text-xs gap-0.5 hover:text-[#1899d6]">
+          <span className="text-2xl">⚙️</span>
+          <span>Settings</span>
+        </Link>
       </nav>
     </div>
   );
