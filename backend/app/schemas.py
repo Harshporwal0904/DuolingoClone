@@ -67,3 +67,28 @@ class UserLessonCompletionOut(BaseSchema):
     lesson_id: int
     completed_at: datetime
     xp_earned: int
+
+class UserMeOut(BaseSchema):
+    id: int
+    username: str
+    total_xp: int
+    streak_count: int
+    hearts: int
+    daily_xp_goal: int
+    xp_today: int
+    gems: int = 500
+
+class PathSkillOut(BaseSchema):
+    id: int
+    title: str
+    order_index: int
+    icon: Optional[str] = None
+    status: SkillStatus
+    crowns: int
+
+class PathUnitOut(BaseSchema):
+    id: int
+    title: str
+    order_index: int
+    skills: List[PathSkillOut]
+
